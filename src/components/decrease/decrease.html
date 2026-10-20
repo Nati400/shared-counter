@@ -1,5 +1,6 @@
 <h1>Decrease</h1>
 
-<p>Count: {{ counterService.count }}</p>
+<p>Count: {{ counterService.counter().value }}</p>
+<p>Last updated: {{ counterService.counter().lastUpdated }}</p>
 
 <button (click)="counterService.decrease()">-</button>

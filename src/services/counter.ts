@@ -1,17 +1,26 @@
-import { Injectable } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
+import { ICounter } from '../models/icounter';
 
 @Injectable({
   providedIn: 'root'
 })
-
 export class CounterService {
-  count: number = 0;
+  counter = signal<ICounter>({
+    value: 0,
+    lastUpdated: 'Not updated yet'
+  });
 
   increase(): void {
-    this.count++;
+    this.counter.update(counter => ({
+      value: counter.value + 1,
+      lastUpdated: new Date().toLocaleTimeString()
+    }));
   }
 
   decrease(): void {
-    this.count--;
+    this.counter.update(counter => ({
+      value: counter.value - 1,
+      lastUpdated: new Date().toLocaleTimeString()
+    }));
   }
 }
